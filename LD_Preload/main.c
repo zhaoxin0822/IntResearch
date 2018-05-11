@@ -8,7 +8,9 @@ int main(int argc, const char *argv[]) {
   int fd;
 
   fd = fileno(stdin);
-  if ((amount_read = read(fd, buffer, sizeof buffer)) == -1) {
+  //read in value will be stored here
+  amount_read = read(fd, buffer, sizeof buffer);
+  if (amount_read == -1) {
     perror("error reading");
     return EXIT_FAILURE;
   }
