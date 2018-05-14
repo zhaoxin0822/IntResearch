@@ -10,10 +10,16 @@
 int main(int argc, char *argv[]){ // specify the server we want to connect on
 
   char *address;
+  char *protocol;
   address = argv[1];
+  protocol = argv[2]; 
+
+  int x = *protocol - '0';
 
   int client_socket;
-  client_socket = socket(AF_INET, SOCK_STREAM, 0);
+  printf("the protocol is '%d'\n", protocol);
+  printf("the protocol is '%d'\n", x);
+  client_socket = socket(AF_INET, SOCK_STREAM, x);
 
   // specify a address
   struct sockaddr_in remote_address;
@@ -29,7 +35,7 @@ int main(int argc, char *argv[]){ // specify the server we want to connect on
   send(client_socket, request, sizeof(request), 0);
   recv(client_socket, &response, sizeof(response), 0);
 
-  printf("respnse from the server: %s\n", response);
+  printf("response from the server: %s\n", response);
   close(client_socket);
 
   return 0;
